@@ -82,9 +82,13 @@ const Posts = () => {
                   </p>
                 </div>
               </div>
-              <div className="px-13 -mt-5">
-                <p className="">{post.text}</p >
-                <img src={`data:image/jpeg;base64,${post.media}`} alt="#" className="w-full rounded-2xl" />
+              <div className="px-13 -mt-5 flex flex-col gap-2">
+                <p className="">{post.text}</p>
+                <img
+                  src={`data:image/jpeg;base64,${post.media}`}
+                  alt="#"
+                  className="w-full rounded-2xl"
+                />
               </div>
             </div>
           ))}
