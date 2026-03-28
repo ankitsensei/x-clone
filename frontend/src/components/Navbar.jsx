@@ -15,7 +15,7 @@ const Navbar = () => {
   const [clickBookMark, setClickBookMark] = useState(false);
   const [clickProfile, setClickProfile] = useState(false);
   return (
-    <div className="flex flex-col justify-between items-start h-screen py-3">
+    <div className="flex flex-col justify-between items-start h-screen py-3 fixed">
       <div className="flex flex-col gap-10 items-start">
         <BsTwitterX className="text-2xl mx-1" />
         <ul className="flex flex-col gap-8">
