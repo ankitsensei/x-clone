@@ -1,7 +1,13 @@
 import express from "express";
 import { xModel } from "../models/xModel.js";
+import multer from "multer";
 
 const router = express.Router();
+
+// Configure multer to store files in memory as buffer.
+const storage = multer.memoryStorage();
+
+const upload = multer({ storage });
 
 // Get all post from Database;
 router.get("/", async (req, res) => {
@@ -25,6 +31,30 @@ router.get("/details/:id", async (req, res) => {
     return res.status(200).json(post);
   } catch (err) {
     console.log(err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+// Post a post in db
+router.post("/", upload.single("media"), async (req, res) => {
+  try {
+    if (!req.body.text || !req.file) {
+      return res.status(400).send({
+        message: "Send all required fields",
+      });
+    }
+    // Store file as base64
+    const photoBase64 = req.file ? req.file.buffer.toString("base64") : null;
+
+    const newPost = {
+      text: req.body.text,
+      media: photoBase64,
+    };
+    console.log(newPost);
+    const posts = await xModel.create(newPost);
+    return res.status(201).send(posts);
+  } catch (err) {
+    console.log(err.message);
     res.status(500).send({ message: err.message });
   }
 });
