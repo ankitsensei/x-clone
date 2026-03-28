@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import AllPosts from "./AllPosts";
+import Home from "./Home";
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
         <Navbar />
       </div>
       <div className="w-3/6 border-s border-zinc-800 h-screen">
-        <AllPosts />
+        <Home />
       </div>
       <div className="w-1/5 border-s border-zinc-800 h-screen"></div>
     </div>
