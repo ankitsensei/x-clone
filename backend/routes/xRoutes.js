@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
 router.get("/details/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await post.findById(id);
+    const post = await xModel.findById(id);
     return res.status(200).json(post);
   } catch (err) {
     console.log(err);
