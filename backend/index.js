@@ -1,14 +1,25 @@
 import express from "express";
 import mongoose from "mongoose";
+import xRoutes from "./routes/xRoutes.js";
+
 import { configDotenv } from "dotenv";
+configDotenv();
 
 const app = express();
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  console.log(res);
-  return res.status(200).send("Hello World");
-});
+const PORT = process.env.PORT;
+const mongoDBURL = process.env.mongoDBURL;
 
-app.listen(3000, (req, res) => {
-  console.log("Server Started at PORT: 3000");
-});
+
+app.use("/", xRoutes);
+
+mongoose
+  .connect(mongoDBURL)
+  .then(() => {
+    console.log("App is connected to Database");
+    app.listen(PORT, () => console.log(`App is running on PORT: ${PORT}`));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
