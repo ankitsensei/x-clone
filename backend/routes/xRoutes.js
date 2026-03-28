@@ -59,4 +59,38 @@ router.post("/", upload.single("media"), async (req, res) => {
   }
 });
 
+// Update a post in db
+router.put("/edit/:id", upload.single("media"), async (req, res) => {
+  try {
+    if (!req.body.text ) {
+      return res.status(400).send({
+        message: "Send all required fields",
+      });
+    }
+    // Store file as base64
+    const photoBase64 = req.file
+      ? req.file.buffer.toString("base64")
+      : req.body.existingImages;
+    const updatedData = {
+      text: req.body.text,
+      media: photoBase64,
+    };
+    if (photoBase64) {
+      updatedData.photo = photoBase64;
+    }
+
+    const { id } = req.params;
+    const result = await xModel.findByIdAndUpdate(id, updatedData);
+
+    if (!result) {
+      return res.status(404).send({ message: "Post not found" });
+    } else {
+      return res.status(200).send({ message: "Post updated successfully" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
 export default router;
