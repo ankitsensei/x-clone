@@ -62,7 +62,7 @@ router.post("/", upload.single("media"), async (req, res) => {
 // Update a post in db
 router.put("/edit/:id", upload.single("media"), async (req, res) => {
   try {
-    if (!req.body.text ) {
+    if (!req.body.text) {
       return res.status(400).send({
         message: "Send all required fields",
       });
@@ -90,6 +90,23 @@ router.put("/edit/:id", upload.single("media"), async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: err.message });
+  }
+});
+
+// Delete a post in db
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await xModel.findByIdAndDelete(id, req.body);
+
+    if (!result) {
+      return res.status(404).send({ message: "Post not found" });
+    } else {
+      return res.status(200).send({ message: "Post deleted successfully" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: err.message });
   }
 });
 
