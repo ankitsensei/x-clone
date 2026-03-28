@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import xRoutes from "./routes/xRoutes.js";
+import cors from "cors";
 
 import { configDotenv } from "dotenv";
 configDotenv();
@@ -8,9 +9,10 @@ configDotenv();
 const app = express();
 app.use(express.json());
 
+app.use(cors());
+
 const PORT = process.env.PORT;
 const mongoDBURL = process.env.mongoDBURL;
-
 
 app.use("/", xRoutes);
 
