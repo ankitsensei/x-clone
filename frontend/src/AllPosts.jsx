@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BiPhotoAlbum } from "react-icons/bi";
 
 const Posts = () => {
+  const ref = useRef();
+
+  const handleInput = () => {
+    ref.current.style.height = "auto";
+    ref.current.style.height = ref.current.scrollHeight + "px";
+  };
   return (
     <div>
       <div className="text-zinc-400 border-zinc-700 border-b p-2 flex justify-evenly items-center h-14">
@@ -16,10 +22,12 @@ const Posts = () => {
           className="w-10 h-10 rounded-full mt-2"
         />
         <div className="w-full h-fit pr-2">
-          <input
-            type="text"
+          <textarea
+            ref={ref}
+            onInput={handleInput}
             placeholder="What's happening?"
-            className="mt-4 text-lg outline-none h-fit w-full"
+            className="mt-4 text-lg outline-none w-full resize-none overflow-hidden"
+            rows={1}
           />
           <div className="w-full border-t border-zinc-700 mt-10 flex py-4 items-center justify-between">
             <BiPhotoAlbum className="w-5 h-5 text-blue-400" />
