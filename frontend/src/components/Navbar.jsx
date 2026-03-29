@@ -71,7 +71,7 @@ const Navbar = () => {
           <span className="hidden lg:block">Post</span>
         </button>
       </div>
-      <div className="flex items-center justify-between w-full pr-6 mb-3">
+      <div className="flex items-center justify-between w-full mb-3">
         <div className="flex gap-3 items-center">
           <img
             src="https://i.pinimg.com/736x/87/5b/4f/875b4fb82c44a038466807b0dcf884cc.jpg"

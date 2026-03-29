@@ -5,7 +5,7 @@ import Home from "./Home";
 const App = () => {
   return (
     <div className="w-full flex justify-center items-start h-screen">
-      <div className="w-18 lg:w-60 border-r border-zinc-800 h-full">
+      <div className="w-18 lg:w-60 border-r border-zinc-800 h-full flex flex-col items-center">
         <Navbar />
       </div>
       <div className="w-124 border-s border-zinc-800 h-screen">
