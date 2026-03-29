@@ -6,6 +6,7 @@ import axios from "axios";
 const CreatePost = () => {
   const [text, setText] = useState("");
   const [media, setMedia] = useState("");
+  const [inputLength, setInputLength] = useState(0);
   const [loading, setLoading] = useState(false);
   const mediaPreview = media ? URL.createObjectURL(media) : null;
   const fileInputRef = useRef(null);
@@ -56,7 +57,10 @@ const CreatePost = () => {
               className="mt-4 text-lg outline-none w-full resize-none overflow-hidden"
               rows={1}
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => {
+                setText(e.target.value);
+                setInputLength(e.target.value.length);
+              }}
             />
             <div className="flex flex-col justify-center items-center mt-4">
               {mediaPreview && (
@@ -82,7 +86,7 @@ const CreatePost = () => {
               </button>
               <button
                 onClick={() => handleSavePost()}
-                className="px-4 py-1 font-semibold bg-zinc-400 text-black rounded-full hover:bg-zinc-200"
+                className={`px-4 py-1 font-semibold ${inputLength > 0 ? "bg-zinc-100" : "bg-zinc-400"} text-black rounded-full hover:bg-zinc-200`}
               >
                 Post
               </button>
