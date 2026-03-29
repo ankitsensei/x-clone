@@ -9,14 +9,15 @@ import { RiBookmarkFill } from "react-icons/ri";
 import { IoPersonSharp, IoPersonOutline } from "react-icons/io5";
 
 import { CiMenuKebab } from "react-icons/ci";
+import { FaFeatherPointed } from "react-icons/fa6";
 
 const Navbar = () => {
   const [clickHome, setClickHome] = useState(true);
   const [clickBookMark, setClickBookMark] = useState(false);
   const [clickProfile, setClickProfile] = useState(false);
   return (
-    <div className="flex flex-col justify-between items-start h-screen py-3 fixed">
-      <div className="flex flex-col gap-10 items-start">
+    <div className="flex flex-col justify-between items-center lg:items-start h-screen py-3 fixed">
+      <div className="flex flex-col gap-10 items-center lg:items-start">
         <BsTwitterX className="text-2xl mx-1" />
         <ul className="flex flex-col gap-8">
           <li
@@ -32,7 +33,7 @@ const Navbar = () => {
             ) : (
               <GoHome className="text-3xl" />
             )}
-            <span>Home</span>
+            <span className="hidden lg:block">Home</span>
           </li>
           <li
             className="navList"
@@ -47,7 +48,7 @@ const Navbar = () => {
             ) : (
               <FiBookmark className="text-3xl" />
             )}
-            <span>Bookmarks</span>
+            <span className="hidden lg:block">Bookmarks</span>
           </li>
           <li
             className="navList"
@@ -62,11 +63,12 @@ const Navbar = () => {
             ) : (
               <IoPersonOutline className="text-3xl" />
             )}
-            <span>Profile</span>
+            <span className="hidden lg:block">Profile</span>
           </li>
         </ul>
-        <button className="px-24 py-3 bg-white text-black rounded-full hover:bg-zinc-200">
-          Post
+        <button className="p-3 lg:px-24 bg-white text-black rounded-full hover:bg-zinc-200">
+          <FaFeatherPointed className="block lg:hidden" />
+          <span className="hidden lg:block">Post</span>
         </button>
       </div>
       <div className="flex items-center justify-between w-full pr-6 mb-3">
@@ -76,12 +78,12 @@ const Navbar = () => {
             alt="dp"
             className="w-10 rounded-full"
           />
-          <div>
+          <div className="hidden lg:block">
             <p className="text-sm font-bold">Ankit Bhagat</p>
             <p className="text-sm font-light text-zinc-400">@webdevankit</p>
           </div>
         </div>
-        <CiMenuKebab className="rotate-90" />
+        <CiMenuKebab className="rotate-90 hidden lg:block" />
       </div>
     </div>
   );
