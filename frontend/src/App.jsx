@@ -11,7 +11,7 @@ const App = () => {
       <div className="w-124 border-s border-zinc-800 h-screen">
         <Home />
       </div>
-      <div className="w-1/5 border-s border-zinc-800 h-screen"></div>
+      <div className="w-1/5 border-s border-zinc-800 h-screen hidden lg:block"></div>
     </div>
   );
 };
