@@ -4,7 +4,7 @@ import CreatePost from "./components/CreatePost";
 
 const Home = () => {
   return (
-    <div>
+    <div className="w-full h-full">
       <div className="text-zinc-400 border-zinc-700 border-b p-2 flex justify-evenly items-center h-14">
         <p className="text-zinc-100">For you</p>
         <p>Following</p>

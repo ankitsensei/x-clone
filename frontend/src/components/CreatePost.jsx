@@ -8,6 +8,7 @@ const CreatePost = () => {
   const [media, setMedia] = useState("");
   const [loading, setLoading] = useState(false);
   const mediaPreview = media ? URL.createObjectURL(media) : null;
+  const fileInputRef = useRef(null);
 
   const handleSavePost = () => {
     const formData = new FormData();
@@ -29,6 +30,10 @@ const CreatePost = () => {
   const handleInput = () => {
     ref.current.style.height = "auto";
     ref.current.style.height = ref.current.scrollHeight + "px";
+  };
+
+  const handleIconClick = () => {
+    fileInputRef.current.click();
   };
   console.log(mediaPreview);
   return (
@@ -64,10 +69,15 @@ const CreatePost = () => {
             </div>
             <div className="w-full border-t border-zinc-700 mt-10 flex py-4 items-center justify-between">
               <button>
-                <BiPhotoAlbum className="w-5 h-5 text-blue-400" />
+                <BiPhotoAlbum
+                  className="w-5 h-5 text-blue-400"
+                  onClick={() => handleIconClick()}
+                />
                 <input
                   type="file"
+                  ref={fileInputRef}
                   onChange={(e) => setMedia(e.target.files[0])}
+                  className="hidden"
                 />
               </button>
               <button
