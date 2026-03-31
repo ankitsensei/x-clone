@@ -42,6 +42,8 @@ const ShowAllPost = () => {
     axios
       .delete(`http://localhost:5555/delete/${id}`)
       .then(() => {
+        setPosts((prev) => prev.filter((post) => post._id !== id));
+        setMenu(null);
         setLoading(false);
       })
       .catch((error) => {

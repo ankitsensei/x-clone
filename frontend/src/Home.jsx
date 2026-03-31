@@ -12,7 +12,7 @@ const Home = () => {
       {/* Create Post */}
       <CreatePost />
       {/* Show posts */}
-      <ShowAllPost />
+      <ShowAllPost/>
     </div>
   );
 };
