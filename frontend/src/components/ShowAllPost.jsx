@@ -36,6 +36,19 @@ const ShowAllPost = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleDelete = (id) => {
+    console.log("Delete");
+    if (!id) return;
+    axios
+      .delete(`http://localhost:5555/delete/${id}`)
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       {loading ? (
@@ -76,7 +89,7 @@ const ShowAllPost = () => {
                       ref={menuRef}
                       className="absolute top-0 right-0 bg-black border border-zinc-400 rounded-lg list-none h-16 w-20 flex flex-col items-start justify-center gap-3 px-2"
                     >
-                      <li>Delete</li>
+                      <li onClick={() => handleDelete(post._id)}>Delete</li>
                       <li>Edit</li>
                     </div>
                   )}
