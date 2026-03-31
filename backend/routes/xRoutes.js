@@ -38,7 +38,7 @@ router.get("/details/:id", async (req, res) => {
 // Post a post in db
 router.post("/", upload.single("media"), async (req, res) => {
   try {
-    if (!req.body.text || !req.file) {
+    if (!req.body.text) {
       return res.status(400).send({
         message: "Send all required fields",
       });
