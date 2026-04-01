@@ -11,7 +11,7 @@ const EditModal = ({ onClose, postId, fetchPosts }) => {
   const [existingMedia, setExistingMedia] = useState(""); // old media
   const fileInputRef = useRef(null);
   const mediaPreview = media ? URL.createObjectURL(media) : null;
-
+  
   // For Input field
   const ref = useRef();
   const handleInput = () => {

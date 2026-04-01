@@ -81,10 +81,20 @@ const ShowAllPost = ({ posts, setPosts }) => {
                   {menu === index && (
                     <div
                       ref={menuRef}
-                      className="absolute top-0 right-0 bg-black border border-zinc-400 rounded-lg list-none h-16 w-20 flex flex-col items-start justify-center gap-3 px-2"
+                      className="absolute top-0 right-0 bg-black border-2 border-zinc-800 rounded-lg list-none h-auto w-30 flex flex-col items-start justify-center shadow-md shadow-zinc-700"
                     >
-                      <li onClick={() => handleDelete(post._id)}>Delete</li>
-                      <li onClick={() => setEditPostId(post._id)}>Edit</li>
+                      <li
+                        className="w-full hover:cursor-pointer py-1 px-2 rounded-md hover:bg-zinc-900"
+                        onClick={() => handleDelete(post._id)}
+                      >
+                        Delete
+                      </li>
+                      <li
+                        className="w-full hover:cursor-pointer py-1 px-2 rounded-md hover:bg-zinc-900"
+                        onClick={() => setEditPostId(post._id)}
+                      >
+                        Edit
+                      </li>
                     </div>
                   )}
                 </div>
