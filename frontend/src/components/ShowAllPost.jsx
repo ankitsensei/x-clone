@@ -9,7 +9,7 @@ import { CiMenuKebab } from "react-icons/ci";
 const ShowAllPost = ({ posts, setPosts }) => {
   const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(true);
+  const [showEditModal, setShowEditModal] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
