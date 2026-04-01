@@ -5,25 +5,10 @@ import Spinner from "./Spinner";
 import { BiPhotoAlbum } from "react-icons/bi";
 import { CiMenuKebab } from "react-icons/ci";
 
-const ShowAllPost = () => {
-  const [posts, setPosts] = useState([]);
+const ShowAllPost = ({ posts, setPosts }) => {
   const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState(null);
   const menuRef = useRef(null);
-
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get("http://localhost:5555/")
-      .then((response) => {
-        setPosts(response.data.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -58,6 +43,7 @@ const ShowAllPost = () => {
       ) : (
         <div>
           {posts
+            ?.filter(Boolean)
             .slice()
             .reverse()
             .map((post, index) => (

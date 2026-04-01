@@ -3,7 +3,7 @@ import Spinner from "./Spinner";
 import { BiPhotoAlbum } from "react-icons/bi";
 import axios from "axios";
 
-const CreatePost = () => {
+const CreatePost = ({ fetchPosts }) => {
   const [text, setText] = useState("");
   const [media, setMedia] = useState("");
   const [inputLength, setInputLength] = useState(0);
@@ -19,6 +19,9 @@ const CreatePost = () => {
     axios
       .post("http://localhost:5555/", formData)
       .then(() => {
+        fetchPosts();
+        setText("");
+        setMedia("");
         setLoading(false);
       })
       .catch((err) => {
