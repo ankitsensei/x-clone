@@ -9,7 +9,7 @@ import { CiMenuKebab } from "react-icons/ci";
 const ShowAllPost = ({ posts, setPosts }) => {
   const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [editPostId, setEditPostId] = useState(null);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -44,9 +44,6 @@ const ShowAllPost = ({ posts, setPosts }) => {
         <Spinner />
       ) : (
         <div>
-          {showEditModal && (
-            <EditModal onClose={() => setShowEditModal(false)} />
-          )}
           {posts
             ?.filter(Boolean)
             .slice()
@@ -83,8 +80,16 @@ const ShowAllPost = ({ posts, setPosts }) => {
                       className="absolute top-0 right-0 bg-black border border-zinc-400 rounded-lg list-none h-16 w-20 flex flex-col items-start justify-center gap-3 px-2"
                     >
                       <li onClick={() => handleDelete(post._id)}>Delete</li>
-                      <li onClick={() => setShowEditModal(true)}>Edit</li>
+                      <li onClick={() => setEditPostId(post._id)}>Edit</li>
                     </div>
+                  )}
+                </div>
+                <div>
+                  {editPostId && (
+                    <EditModal
+                      postId={editPostId}
+                      onClose={() => setEditPostId(null)}
+                    />
                   )}
                 </div>
                 <div className="px-13 -mt-5 flex flex-col gap-2">

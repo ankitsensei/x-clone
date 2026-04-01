@@ -1,13 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import { BiPhotoAlbum } from "react-icons/bi";
 import { IoCloseOutline } from "react-icons/io5";
 
-const EditModal = ({ onClose }) => {
+const EditModal = ({ onClose, postId }) => {
   const [inputLength, setInputLength] = useState(0);
   const [text, setText] = useState("");
-  const [media, setMedia] = useState("");
-  const mediaPreview = media ? URL.createObjectURL(media) : null;
+  const [media, setMedia] = useState(null);
+  const [existingMedia, setExistingMedia] = useState(""); // old media
   const fileInputRef = useRef(null);
+  const mediaPreview = media ? URL.createObjectURL(media) : null;
 
   // For Input field
   const ref = useRef();
@@ -22,6 +24,31 @@ const EditModal = ({ onClose }) => {
       onClose();
     }
   };
+
+  const handleEditPost = () => {
+    console.log("helllo");
+    console.log(postId);
+  };
+  const handleIconClick = () => {
+    fileInputRef.current.click();
+  };
+
+  useEffect(() => {
+    if (!postId) return;
+
+    // reset first
+    setText("");
+    setMedia(null);
+    setExistingMedia("");
+
+    axios
+      .get(`http://localhost:5555/details/${postId}`)
+      .then((res) => {
+        setText(res.data.text);
+        setExistingMedia(res.data.media);
+      })
+      .catch((err) => console.log(err));
+  }, [postId]);
 
   return (
     <div
@@ -56,19 +83,26 @@ const EditModal = ({ onClose }) => {
             }}
           />
           <div className="flex flex-col justify-center items-center mt-4">
-            {mediaPreview && (
+            {mediaPreview ? (
               <img
                 src={mediaPreview}
                 alt="img"
                 className="w-auto h-74 rounded-xl object-cover"
               />
-            )}
+            ) : existingMedia ? (
+              <img
+                src={`data:image/jpeg;base64,${existingMedia}`}
+                alt="img"
+                className="w-auto h-74 rounded-xl object-cover"
+              />
+            ) : null}
           </div>
+          {/* Image input */}
           <div className="w-full border-t border-zinc-700 mt-10 flex py-4 items-center justify-between">
             <button>
               <BiPhotoAlbum
                 className="w-5 h-5 text-blue-400"
-                // onClick={() => handleIconClick()}
+                onClick={() => handleIconClick()}
               />
               <input
                 type="file"
@@ -78,7 +112,7 @@ const EditModal = ({ onClose }) => {
               />
             </button>
             <button
-              // onClick={() => handleSavePost()}
+              onClick={() => handleEditPost()}
               className={`px-4 py-1 font-semibold ${inputLength > 0 ? "bg-zinc-100" : "bg-zinc-400"} text-black rounded-full hover:bg-zinc-200`}
             >
               Post
