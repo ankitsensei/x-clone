@@ -41,6 +41,11 @@ const EditModal = ({ onClose, postId }) => {
       .put(`http://localhost:5555/edit/${postId}`, formData)
       .then(() => {
         setLoading(false);
+        // reset first
+        setText("");
+        setMedia(null);
+        setExistingMedia("");
+        onClose();
       })
       .catch((err) => {
         setLoading(false);
