@@ -4,14 +4,13 @@ import Spinner from "./Spinner";
 import { BiPhotoAlbum } from "react-icons/bi";
 import { IoCloseOutline } from "react-icons/io5";
 
-const EditModal = ({ onClose, postId }) => {
+const EditModal = ({ onClose, postId, fetchPosts }) => {
   const [inputLength, setInputLength] = useState(0);
   const [text, setText] = useState("");
   const [media, setMedia] = useState(null);
   const [existingMedia, setExistingMedia] = useState(""); // old media
   const fileInputRef = useRef(null);
   const mediaPreview = media ? URL.createObjectURL(media) : null;
-  const [loading, setLoading] = useState(false);
 
   // For Input field
   const ref = useRef();
@@ -36,11 +35,10 @@ const EditModal = ({ onClose, postId }) => {
     } else {
       formData.append("media", existingMedia);
     }
-    setLoading(true);
     axios
       .put(`http://localhost:5555/edit/${postId}`, formData)
       .then(() => {
-        setLoading(false);
+        fetchPosts();
         // reset first
         setText("");
         setMedia(null);
@@ -48,7 +46,6 @@ const EditModal = ({ onClose, postId }) => {
         onClose();
       })
       .catch((err) => {
-        setLoading(false);
         console.log(err);
       });
   };
@@ -59,12 +56,6 @@ const EditModal = ({ onClose, postId }) => {
 
   useEffect(() => {
     if (!postId) return;
-
-    // reset first
-    setText("");
-    setMedia(null);
-    setExistingMedia("");
-
     axios
       .get(`http://localhost:5555/details/${postId}`)
       .then((res) => {

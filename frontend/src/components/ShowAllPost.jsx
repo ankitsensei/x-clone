@@ -12,6 +12,10 @@ const ShowAllPost = ({ posts, setPosts }) => {
   const [editPostId, setEditPostId] = useState(null);
   const menuRef = useRef(null);
 
+  const fetchPosts = () => {
+    axios.get("http://localhost:5555/").then((res) => setPosts(res.data.data));
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -89,6 +93,7 @@ const ShowAllPost = ({ posts, setPosts }) => {
                     <EditModal
                       postId={editPostId}
                       onClose={() => setEditPostId(null)}
+                      fetchPosts={fetchPosts}
                     />
                   )}
                 </div>
