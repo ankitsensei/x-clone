@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import Spinner from "./Spinner";
 import { BiPhotoAlbum } from "react-icons/bi";
 import { IoCloseOutline } from "react-icons/io5";
 
@@ -10,6 +11,7 @@ const EditModal = ({ onClose, postId }) => {
   const [existingMedia, setExistingMedia] = useState(""); // old media
   const fileInputRef = useRef(null);
   const mediaPreview = media ? URL.createObjectURL(media) : null;
+  const [loading, setLoading] = useState(false);
 
   // For Input field
   const ref = useRef();
@@ -26,9 +28,26 @@ const EditModal = ({ onClose, postId }) => {
   };
 
   const handleEditPost = () => {
-    console.log("helllo");
     console.log(postId);
+    const formData = new FormData();
+    formData.append("text", text);
+    if (media) {
+      formData.append("media", media);
+    } else {
+      formData.append("media", existingMedia);
+    }
+    setLoading(true);
+    axios
+      .put(`http://localhost:5555/edit/${postId}`, formData)
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   };
+
   const handleIconClick = () => {
     fileInputRef.current.click();
   };
