@@ -36,7 +36,7 @@ const EditModal = ({ onClose, postId, fetchPosts }) => {
       formData.append("media", existingMedia);
     }
     axios
-      .put(`http://localhost:5555/edit/${postId}`, formData)
+      .put(`https://x-clone-production-0e9f.up.railway.app/edit/${postId}`, formData)
       .then(() => {
         fetchPosts();
         // reset first
@@ -57,7 +57,7 @@ const EditModal = ({ onClose, postId, fetchPosts }) => {
   useEffect(() => {
     if (!postId) return;
     axios
-      .get(`http://localhost:5555/details/${postId}`)
+      .get(`https://x-clone-production-0e9f.up.railway.app/details/${postId}`)
       .then((res) => {
         setText(res.data.text);
         setExistingMedia(res.data.media);

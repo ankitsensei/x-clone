@@ -13,7 +13,7 @@ const ShowAllPost = ({ posts, setPosts }) => {
   const menuRef = useRef(null);
 
   const fetchPosts = () => {
-    axios.get("http://localhost:5555/").then((res) => setPosts(res.data.data));
+    axios.get("https://x-clone-production-0e9f.up.railway.app/").then((res) => setPosts(res.data.data));
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const ShowAllPost = ({ posts, setPosts }) => {
     console.log("Delete");
     if (!id) return;
     axios
-      .delete(`http://localhost:5555/delete/${id}`)
+      .delete(`https://x-clone-production-0e9f.up.railway.app/delete/${id}`)
       .then(() => {
         setPosts((prev) => prev.filter((post) => post._id !== id));
         setMenu(null);

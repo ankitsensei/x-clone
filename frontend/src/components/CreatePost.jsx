@@ -17,7 +17,7 @@ const CreatePost = ({ fetchPosts }) => {
     formData.append("media", media);
     setLoading(true);
     axios
-      .post("http://localhost:5555/", formData)
+      .post("https://x-clone-production-0e9f.up.railway.app/", formData)
       .then(() => {
         fetchPosts();
         setText("");

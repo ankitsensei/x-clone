@@ -8,7 +8,7 @@ const Home = () => {
 
   const fetchPosts = () => {
     axios
-      .get("http://localhost:5555/")
+      .get("https://x-clone-production-0e9f.up.railway.app/")
       .then((res) => setPosts(res.data.data))
       .catch((err) => console.log(err));
   };
