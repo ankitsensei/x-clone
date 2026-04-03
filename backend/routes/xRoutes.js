@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
     console.log(err);
     res.status(500).send({ message: err.message });
   }
-});
+}); 
 
 // Get one post from Database;
 router.get("/details/:id", async (req, res) => {
